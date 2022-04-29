@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:my="clr-namespace:Project_App"
+             x:Class="Project_App.SearchPage"
+             >
+    <ContentPage.BindingContext>
+        <my:ScraperViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="1" CornerRadius="15" Grid.Column="2" x:Name="SearchButton" Text="Rozpocznij" HeightRequest="80" WidthRequest="80" FontSize="Large" TextColor="White" BackgroundColor="DarkOrange"
+                Clicked="SearchButton_Clicked"
+                Command="{Binding AddScraperItemsCommand}"/>
+        <Entry  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding SearchedItemValue}" FontSize="24" Placeholder="Słowa kluczowe"/>
+        <Image Grid.Row="5" Grid.Column="2" x:Name="SearchIcon" WidthRequest="100" HeightRequest="100" Source="SearchIcon.png" />
+        <Label  Grid.Row="4" Grid.ColumnSpan="5" x:Name="SearchText" FontSize="24" Text="Tu będą wyniki wyszukiwania :)"
+                IsVisible="True"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        <ListView Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="5" HasUnevenRows="True" x:Name="ScraperItems" ItemsSource="{Binding ObservableScraperItems}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Frame>
+                                <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" FontSize="24" TextColor="Blue"/>
+                                    <Image HeightRequest="100" >
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding ImageUrl}" />
+                                        </Image.Source>
+                                    </Image>
+                                    <Label Text="{Binding Description}" FontSize="18" TextColor="Black" LineBreakMode="WordWrap" />
+                                    <Label Text="{Binding Website}" FontSize="18" HorizontalTextAlignment="Center" TextColor="OrangeRed"/>
+                                </StackLayout>
+                                <Frame.GestureRecognizers >
+                                    <TapGestureRecognizer Tapped="Frame_Clicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

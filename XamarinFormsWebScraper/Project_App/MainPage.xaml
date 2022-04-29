@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:my="clr-namespace:Project_App"
+             x:Class="Project_App.MainPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <my:ScraperViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BackgroundColor="#2196F3" Padding="4" CornerRadius="0">
+            <Label Text="Wyszukiwarka okien" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Image Grid.Row="1" Grid.Column="2" x:Name="Logo" WidthRequest="100" HeightRequest="100" Source="Logo.png" />
+
+        <Button Grid.Row="2" CornerRadius="15" Grid.Column="2" Grid.ColumnSpan="2" Clicked="SearchButton_Clicked"
+                x:Name="SearchButton" Text="Wyszukaj" BackgroundColor="Orange" TextColor="White" FontSize="20"/>
+        <Button Grid.Row="4" CornerRadius="15" Grid.Column="2" Grid.ColumnSpan="2" Clicked="MapButton_Clicked"
+                x:Name="MapButton" Text="Mapa" BackgroundColor="Green" TextColor="White" FontSize="20"/>
+        <Button Grid.Row="6" CornerRadius="15" Grid.Column="2" Grid.ColumnSpan="2" Clicked="LinkButton1_Clicked"
+                x:Name="Button1" Text="O oknach dzwiękoszczelnych" BackgroundColor="DeepSkyBlue" TextColor="White" FontSize="18"/>
+        <Button Grid.Row="8" CornerRadius="15" Grid.Column="2" Grid.ColumnSpan="2"  Clicked="LinkButton2_Clicked"
+                x:Name="Button2" Text="O wpływie hałasu"  BackgroundColor="DeepSkyBlue" TextColor="White"  FontSize="20"/>
+    </Grid> 
+</ContentPage>
