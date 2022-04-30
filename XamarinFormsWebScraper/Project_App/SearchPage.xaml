@@ -28,7 +28,7 @@
         <Button Grid.Row="1" CornerRadius="15" Grid.Column="2" x:Name="SearchButton" Text="Rozpocznij" HeightRequest="80" WidthRequest="80" FontSize="Large" TextColor="White" BackgroundColor="DarkOrange"
                 Clicked="SearchButton_Clicked"
                 Command="{Binding AddScraperItemsCommand}"/>
-        <Entry  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding SearchedItemValue}" FontSize="24" Placeholder="Słowa kluczowe"/>
+        <Entry  x:Name="EntryBar" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="24" Placeholder="Słowa kluczowe"/>
         <Image Grid.Row="5" Grid.Column="2" x:Name="SearchIcon" WidthRequest="100" HeightRequest="100" Source="SearchIcon.png" />
         <Label  Grid.Row="4" Grid.ColumnSpan="5" x:Name="SearchText" FontSize="24" Text="Tu będą wyniki wyszukiwania :)"
                 IsVisible="True"

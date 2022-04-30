@@ -22,6 +22,7 @@ namespace Project_App
             SearchText.IsVisible = false;
             SearchIcon.IsVisible = false;
             SearchButton.Text = "Wyszukaj ponownie";
+            ScraperViewModel.FilteredText = EntryBar.Text;
         }
 
         private void SettingsButton_Clicked(object sender, EventArgs e)

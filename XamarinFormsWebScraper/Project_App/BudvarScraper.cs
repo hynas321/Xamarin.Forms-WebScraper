@@ -8,10 +8,10 @@ namespace Project_App
 {
     public class BudvarScraper : IScraper
     {
+        private ScraperItem[] scrapedItems = new ScraperItem[6];
         public string Link { get; set; }
         public HtmlWeb Web { get; set; }
         public HtmlDocument Doc { get; set; }
-        private ScraperItem[] scrapedItems = new ScraperItem[6];
         public BudvarScraper()
         {
             Link = "https://www.budvarcentrum.pl/typ-produktu/okna-pvc/";
