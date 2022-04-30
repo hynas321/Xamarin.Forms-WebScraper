@@ -13,13 +13,8 @@ namespace Project_App
 {
     public class ScraperViewModel
     {
-        public ObservableCollection<ScraperItem> ObservableScraperItems { get; set; }
+        public ObservableCollection<ScraperItem> ObservableScraperItems { get; set; } = new ObservableCollection<ScraperItem>();
         public string SearchedItemValue { get; set; }
-
-        public ScraperViewModel()
-        {
-            ObservableScraperItems = new ObservableCollection<ScraperItem>();
-        }
 
         public ICommand AddScraperItemsCommand => new Command(AddScraperItemsThread);
 
@@ -31,12 +26,12 @@ namespace Project_App
 
         public void AddScraperItems()
         {
-            GlobalScraper.GlobalList().Clear();
             ObservableScraperItems.Clear();
-            BudvarScraper budvar = new BudvarScraper(new GlobalScraper());
-            //place for more initiated classes from different pages
 
-            foreach (var item in GlobalScraper.GlobalList())
+            IScraper budvarScraper = new BudvarScraper();
+            budvarScraper.ScrapeWebsite();
+
+            foreach (ScraperItem item in budvarScraper.GetScrapedItems())
             {
                 ObservableScraperItems.Add(item);
             }
