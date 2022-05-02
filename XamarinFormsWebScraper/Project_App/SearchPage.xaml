@@ -34,6 +34,8 @@
                 IsVisible="True"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+        <ActivityIndicator Grid.Row="5" Grid.Column="2" x:Name="Indicator"  IsRunning="False"  IsEnabled="False"  IsVisible="False"  
+                           Color="Blue" Scale="2" VerticalOptions="Center" HorizontalOptions="Center"/>
         <ListView Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="5" HasUnevenRows="True" x:Name="ScraperItems" ItemsSource="{Binding ObservableScraperItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>

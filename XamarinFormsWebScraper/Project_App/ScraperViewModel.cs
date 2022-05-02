@@ -11,10 +11,10 @@ namespace Project_App
 {
     public class ScraperViewModel
     {
-        public ObservableCollection<ScraperItem> ObservableScraperItems { get; set; } = new ObservableCollection<ScraperItem>();
-        public static string FilteredText { get; set; } = null;
-
         public ICommand AddScraperItemsCommand => new Command(AddScraperItemsThread);
+        public ObservableCollection<ScraperItem> ObservableScraperItems { get; set; } = new ObservableCollection<ScraperItem>();
+        public static string EntryBarText { get; set; } = null;
+
         public void AddScraperItemsThread()
         {
             Thread t = new Thread(AddScraperItems);
@@ -23,27 +23,44 @@ namespace Project_App
         public void AddScraperItems()
         {
             ObservableScraperItems.Clear();
+            AddScrapedElements(new BudvarScraper());
+        }
 
-            IScraper budvarScraper = new BudvarScraper();
-            budvarScraper.ScrapeWebsite();
+        private void AddScrapedElements(IScraper scraper)
+        {
+            scraper.ScrapeWebsite();
 
-            foreach (ScraperItem item in budvarScraper.GetScrapedItems())
+            foreach (ScraperItem item in scraper.GetScrapedItems())
             {
-                if (FilteredText == null)
+                if (EntryBarText == null)
                 {
                     ObservableScraperItems.Add(item);
                     continue;
                 }
 
-                if (item.Name.ToLower().Contains(FilteredText.ToLower()))
-                {
-                    ObservableScraperItems.Add(item);
-                }
-                else if (item.Description.ToLower().Contains(FilteredText.ToLower()))
+                if (KeywordsInEntryBar(item))
                 {
                     ObservableScraperItems.Add(item);
                 }
             }
+        }
+
+        private bool KeywordsInEntryBar(ScraperItem item)
+        {
+            if (item.Name.ToLower().Contains(EntryBarText.Trim().ToLower()))
+            {
+                return true;
+            }
+            if (item.Description.ToLower().Contains(EntryBarText.Trim().ToLower()))
+            {
+                return true;
+            }
+            if (item.Website.ToLower().Contains(EntryBarText.Trim().ToLower()))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

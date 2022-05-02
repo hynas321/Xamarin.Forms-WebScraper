@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using HtmlAgilityPack;
 
 namespace Project_App
@@ -9,14 +10,19 @@ namespace Project_App
     public class BudvarScraper : IScraper
     {
         private ScraperItem[] scrapedItems = new ScraperItem[6];
-        public string Link { get; set; }
-        public HtmlWeb Web { get; set; }
-        public HtmlDocument Doc { get; set; }
+        private string link = "https://www.budvarcentrum.pl/typ-produktu/okna-pvc/";
+        private HtmlWeb web = new HtmlWeb();
+        private HtmlDocument doc;
         public BudvarScraper()
         {
-            Link = "https://www.budvarcentrum.pl/typ-produktu/okna-pvc/";
-            Web = new HtmlWeb();
-            Doc = Web.Load(Link);
+            try
+            {
+                doc = web.Load(link);
+            }
+            catch 
+            {
+                
+            }
         }
 
         public List<ScraperItem> GetScrapedItems()
@@ -40,7 +46,7 @@ namespace Project_App
             int count = 0;
             string[] elements = new string[6];
 
-            foreach (var element in Doc.DocumentNode.SelectNodes(path))
+            foreach (var element in doc.DocumentNode.SelectNodes(path))
             {
                 try
                 {
@@ -58,7 +64,7 @@ namespace Project_App
             int count = 0;
             string[] elements = new string[6];
 
-            foreach (var element in Doc.DocumentNode.SelectNodes(path))
+            foreach (var element in doc.DocumentNode.SelectNodes(path))
             {
                 try
                 {
@@ -70,8 +76,5 @@ namespace Project_App
 
             return elements;
         }
-
-
-
     }
 }
